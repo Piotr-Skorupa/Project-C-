@@ -1,3 +1,3 @@
 # Projekt C++ 
-## Komunikator internetowy "Paplanina"
+## Komunikator "Paplanina"
 
