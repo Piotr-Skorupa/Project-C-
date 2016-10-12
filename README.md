@@ -1,2 +1,3 @@
-# Projekt C++
-## Gra w costam
+# Projekt C++ 
+## Komunikator internetowy "Paplanina"
+
