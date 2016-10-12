@@ -7,5 +7,5 @@
 
 ### Harmonogram Pracy:
 #### Do 12.11.2016r. :
-*Dokształcić się z obsługi RabbitMQ,
-*Stworzenie serwera oraz logowania (wliczając bazę danych)
+* Dokształcić się z obsługi RabbitMQ,
+* Stworzenie serwera oraz logowania (wliczając bazę danych)
