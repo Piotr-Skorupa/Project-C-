@@ -1,1 +1,2 @@
-# Project-C-
+# Projekt C++
+## Gra w costam
