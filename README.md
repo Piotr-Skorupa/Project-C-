@@ -9,3 +9,13 @@
 #### Do 12.11.2016r. :
 * Dokształcić się z obsługi RabbitMQ,
 * Stworzenie serwera oraz logowania (wliczając bazę danych)
+#### Do 22.11.2016r. :
+* Podstawowe pierwsze okno wstępne logowania,
+* Wstępne okno kontaktów
+#### Do 10.12.2016r. :
+* Wstępne okno wiadomości,
+* Pierwsze próby działania programu, przy dwóch kontach ( Gotowy Prototyp )
+#### Do 12.01.2017r. :
+* Dopieszczenie graficzne
+* Gotowy porojekt
+* Stworzona prezentacja projektu 
