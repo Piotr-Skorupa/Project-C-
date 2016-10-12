@@ -6,4 +6,6 @@
   Program napisany zostanie w języku C++, z wykorzystaniem, biblioteki SFML do stworzenia graficznego interfejsu. Sieć komunikacyjna opierała się będzie na serwerze RabbitMQ. Niestety na chwilę obecną niewiele jeszcze wiem o tych serwerach, dlatego bardzo możliwe, że będę jeszcze musiał stworzyć do niego bezę danych w SQLite. Do połączenia serwera z programem wykorzystam natomiast gotowe biblioteki C++ służące do połączenia z RabbitMQ wydane przez jego twórców.
 
 ### Harmonogram Pracy:
-#### Do 
+#### Do 12.11.2016r. :
+*Dokształcić się z obsługi RabbitMQ,
+*Stworzenie serwera oraz logowania (wliczając bazę danych)
