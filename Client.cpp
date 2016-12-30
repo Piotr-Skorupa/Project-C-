@@ -1,17 +1,22 @@
 #include "Client.h"
+#include <stdio.h>
 #include "PacketType.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
 #include <iostream>
 
-Client::Client(const std::string & name_):name(name_)
-{
-	
+Client::Client() {
 }
 
-
-Client::~Client(void)
-{
+Client::Client(const Client& orig) {
 }
 
+Client::~Client() {
+}
+
+void Client::connect(){
+    printf("connecting\n");
+}
 
 sf::Socket::Status Client::connect(const sf::IpAddress & IP, unsigned short port)
 {
@@ -41,3 +46,4 @@ sf::Socket::Status Client::receive(std::string & msg)
 	}
 	return status;
 }
+
