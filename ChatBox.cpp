@@ -1,12 +1,15 @@
 #include "ChatBox.h"
 #include "Client.h"
-#include "MessageBox.h"
+//#include "MessageBox.h"
+#include "PacketType.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
-#include <iostream>
+
+
 
 ChatBox::ChatBox() {
 }
@@ -14,34 +17,26 @@ ChatBox::ChatBox() {
 ChatBox::ChatBox(const ChatBox& orig) {
 }
 
-ChatBox::~ChatBox() {
+ChatBox::~ChatBox(){
+    
 }
+
 
 void ChatBox::run(){
     
     port = 8080;
     adres= sf::IpAddress("127.0.0.1");
-    std::string name;
-    std::string schowek;
-    std::string text1 = "Podaj nazwe uzytkownika (max 10 bez polskich znakow)";
-    std::string text2 =  "A nastepnie kliknij przycisk 'Start Client'";
-    //unsigned short port=8080;
-   // sf::IpAddress a2("127.0.0.1");
-    // 1. odczytać name klienta z pola tekstowego w oknie
-    // 2. podstawić client1.name = to co odczytałem
-    // 3 uruchomić: client1.connect(); w oddzielnym  wątku:
-    // status=client.connect(a2, port);
-    // 4. jeśli status ok, to wyświetlić oddzielne okno ( z name w tytule ) do rozmow
-    // 5. ja client odbiera komunikat to wyświetlić go w tym oknie,
-    // 6. jak wpisałem tekst mojego komunikatu w polu tekstowym okna to wywołać client.send(type, tekst)
     
+    text1 = "Podaj nazwe uzytkownika (max 10 bez polskich znakow)";
+    text2 =  "A nastepnie kliknij przycisk 'Start Client'";
+        
     
-    int stan_okna = 0; //przechowywanie wartości która mówi jakie tło podstawić
+    stan_okna = 0; //przechowywanie wartości która mówi jakie tło podstawić
      // making window :
     sf::RenderWindow window(sf::VideoMode(400, 800), "Paplanina v1.0");
     
     // prostokat pod tekst wpisywany
-    sf::RectangleShape rectangle;
+    
     rectangle.setSize(sf::Vector2f(220, 50));
     rectangle.setFillColor(sf::Color::Cyan);
     rectangle.setOutlineColor(sf::Color::Black);
@@ -49,14 +44,10 @@ void ChatBox::run(){
     rectangle.setPosition(90, 270);
     
     // ładowanie textów
-    sf::Text texto;
-    sf::Font font;
+    
     texto.setFont(font);
     font.loadFromFile("resources/czcionka.ttf");
-    sf::Text login;
-    sf::Text wskazowka;
     wskazowka.setFont(font);
-    sf::Text wskazowka2;
     wskazowka2.setFont(font);
     
     // tekst wpisywany
@@ -108,9 +99,7 @@ void ChatBox::run(){
     sf::Sprite wyloguj;
     wyloguj.setTexture(pop);
     wyloguj.setPosition(280,750);
-    
-  //  Client client1();
-    
+       
     // program main loop:
     
     while (window.isOpen())
@@ -125,16 +114,27 @@ void ChatBox::run(){
             if (event.type == sf::Event::Closed){
                 window.close();
             }
+            
            
             if(event.type==sf::Event::TextEntered && stan_okna == 0 && schowek.size()<=9 )
             {
-		char code=static_cast<char>(event.text.unicode);
+		char code = static_cast<char> (event.text.unicode);
 		
 		if(event.text.unicode==13 && schowek.size()!=0)//enter
 		{
                     stan_okna = 1;
                     name = schowek;
                     schowek = "";
+                    status = client.connect(adres, port);
+                
+                    
+                    if(status!=sf::Socket::Done)
+                    {
+                       std::cout<<"Sorry we couldn't connect\n";
+                       
+                    }
+                    client.send(INITIAL_NAME_DATA, name);
+                    
 		}
 
 		else if(code!='\b'){
@@ -142,9 +142,9 @@ void ChatBox::run(){
                         login.setString(schowek);}
 		else if(code=='\b')
 		{
-			if(schowek.size()>0)
+			if(schowek.size()>0){
 //				schowek.pop_back();
-                                login.setString(schowek);
+                                login.setString(schowek);}
                                 
 		}
                 else login.setString(schowek);
@@ -157,18 +157,14 @@ void ChatBox::run(){
             {   
                 name = schowek;
                 schowek = "";
-                std::cout<<"Zalogowano"<<std::endl;
                 stan_okna = 1;
-                
-                
-                //sf::Socket::Status status;
                 status = client.connect(adres, port);
                 
                     
                     if(status!=sf::Socket::Done)
                     {
                        std::cout<<"Sorry we couldn't connect\n";
-                       //return -1;
+                       
                     }
                     client.send(INITIAL_NAME_DATA, name);
                     
