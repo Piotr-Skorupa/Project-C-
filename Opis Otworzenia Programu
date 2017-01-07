@@ -1,0 +1,4 @@
+Program do odpalenia potrzebuje podłaczonych bibliotek SFML. 
+Podane tutaj pliki graficzne i audio należy umieścić w folderze resources.
+Do poprawnego działania programu potrzebny jest również lokalny server, który znajduje się w moim drugim respozytorium.
+Gotowe !
