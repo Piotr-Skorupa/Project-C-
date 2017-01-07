@@ -4,6 +4,7 @@
 #include "PacketType.h"
 #include <stdio.h>
 #include <iostream>
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
@@ -20,9 +21,14 @@ MessageBox::~MessageBox() {
 
 void MessageBox::run(Client * client, sf::Socket::Status *status, std::string name, std::string * potrzebne) {
 
-
+    
     sf::RenderWindow window2(sf::VideoMode(600, 600), name);
-
+    
+    buffer.loadFromFile("resources/mess.wav");
+    message.setBuffer(buffer);
+    
+    
+    
     rectangle1.setSize(sf::Vector2f(580, 490));
     rectangle1.setFillColor(sf::Color::Cyan);
     rectangle1.setOutlineColor(sf::Color::Black);
@@ -229,6 +235,7 @@ void MessageBox::run(Client * client, sf::Socket::Status *status, std::string na
                 napis1.setString(tresci[0]);
             }
             (*potrzebne) = "";
+            message.play();
         }
         while (window2.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
